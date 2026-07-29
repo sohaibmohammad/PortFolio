@@ -42,7 +42,7 @@ const Hero = () => {
         </div> 
       </div>
 
-      <div className='overflow-hidden xl:flex-1 xl:h-auto md:h-[550px] h-auto mr-4' >
+      <div className='overflow-hidden xl:flex-1 xl:h-auto md:h-[550px] h-auto mr-9 mt-9' >
         <img  className="rounded-full opacity-25" src={design} alt='pic'/>
         </div>
       
