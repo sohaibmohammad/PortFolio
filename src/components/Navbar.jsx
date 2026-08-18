@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import resume from '../assets/resume.pdf';
 import { styles } from '../style';
@@ -9,7 +9,7 @@ import { logo } from '../assets';
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
-
+  const menuRef=useRef(null)
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = resume;
@@ -19,7 +19,22 @@ const Navbar = () => {
     link.click();
     document.body.removeChild(link);
   };
+useEffect(() => {
+    // دالة بتفحص وين المستخدم كبس
+    const handleClickOutside = (event) => {
+      // إذا الكبسة كانت برا الـ menuRef والقائمة أساساً مفتوحة (toggle === true)
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+       
+        setToggle(false);
+      }
+    };
 
+     document.addEventListener("mousedown", handleClickOutside);
+
+     return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <nav className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`}>
       <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
@@ -39,7 +54,7 @@ const Navbar = () => {
             <li
               key={link.id}
               className={`${
-                active === link.title ? "text-white" : "text-secondary"
+                active === link.title ? "text-[#915eff]" : "text-secondary"
               } hover:text-white text-[18px] font-medium cursor-pointer`}
               onClick={() => setActive(link.title)}
             >
@@ -57,44 +72,50 @@ const Navbar = () => {
         </ul>
 
         {/* شاشة الموبايل */}
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
-          <img 
-            src={toggle ? close : menu} 
+        <div           ref={menuRef}
+  className=' sm:hidden flex flex-1 justify-end items-center'>
+       
+       {
+        !toggle ? (
+          <div
+             src={toggle ? close : menu} 
             alt='menu'
-            className='w-[28px] h-[28px] object-contain cursor-pointer'
+            className='w-[20px] h-[24px]  object-contain cursor-pointer flex flex-col justify-between rounded-[10px] items-end z-30'
             onClick={() => setToggle(!toggle)}
-          />
-
-          {/* تم تصحيح شرط الإظهار والإخفاء هنا !toggle */}
-          <div className={`${!toggle ? 'hidden' : 'flex'} p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl flex-col gap-4`}>
-            <ul className="list-none flex justify-end items-start flex-col gap-4">
-              {navLinks.map((link) => (
-                <li
-                  key={link.id}
-                  className={`${
-                    active === link.title ? "text-white" : "text-secondary"
-                  } font-poppins font-medium cursor-pointer text-[16px]`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(link.title);
-                  }}
-                >
-                  <a href={`#${link.id}`}>{link.title}</a>
-                </li>
-              ))}
-            </ul>
-            
-            {/* زر السيرة الذاتية يظهر أيضاً في قائمة الموبايل */}
-            <button 
-              onClick={() => {
-                setToggle(false);
-                handleDownloadResume();
-              }}
-              className='bg-green-700 text-white py-2 px-3 rounded-md hover:bg-green-600 cursor-pointer text-sm text-center'
-            >
-              My Resume
-            </button>
-          </div>
+          >
+            <span className='inline-block w-[20px] h-[4px] bg-[#915eff] rounded-full'></span>
+            <span className='inline-block w-[28px] h-[4px] bg-[#915eff] rounded-full'></span>
+            <span className='inline-block w-[28px] h-[4px] bg-[#915eff] rounded-full'></span>
+          </div>):(<div></div>)
+}
+   <div className={`${!toggle ? 'hidden' : 'flex'} bottom-0 p-6  fixed top-0 right-0 w-[40%]  z-10  flex-col justify-between shadow-2xl bg-[#fcfcfc]`}>
+  <ul className="list-none  flex justify-start items-start flex-col gap-6 w-full pt-4">
+    {navLinks.map((link) => (
+      <li
+        key={link.id}
+        className={`${
+          active === link.title ? "text-[#915eff]" : "text-secondary"
+        } font-poppins font-medium cursor-pointer text-[18px]`}
+        onClick={() => {
+          setActive(link.title);
+          setToggle(false);
+        }}
+      >
+        <a href={`#${link.id}`}>{link.title}</a>
+      </li>
+    ))}
+  </ul>
+  
+  <button 
+    onClick={() => {
+      setToggle(false);
+      handleDownloadResume();
+    }}
+    className='bg-green-700 text-white py-3 px-4 rounded-xl hover:bg-green-600 cursor-pointer text-sm text-center w-full'
+  >
+    My Resume
+  </button>
+</div>
         </div>
       </div>
     </nav>
