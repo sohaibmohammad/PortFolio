@@ -88,8 +88,7 @@ useEffect(() => {
             <span className='inline-block w-[28px] h-[4px] bg-[#915eff] rounded-full'></span>
           </div>):(<div></div>)
 }
-   <div className={`${!toggle ? 'hidden' : 'flex'} bottom-0 p-6  fixed top-0 right-0 w-[40%]  z-10  flex-col justify-between shadow-2xl bg-[#fcfcfc]`}>
-  <ul className="list-none  flex justify-start items-start flex-col gap-6 w-full pt-4">
+<div className={`${!toggle ? 'hidden' : 'flex'} bottom-0 p-6 fixed top-0 right-0 w-[60%] sm:w-[40%] z-10 flex-col gap-8 shadow-2xl bg-[#fcfcfc]  pt-30`}>  <ul className="list-none  flex justify-start items-start flex-col gap-6 w-full pt-5">
     {navLinks.map((link) => (
       <li
         key={link.id}
@@ -111,7 +110,7 @@ useEffect(() => {
       setToggle(false);
       handleDownloadResume();
     }}
-    className='bg-green-700 text-white py-3 px-4 rounded-xl hover:bg-green-600 cursor-pointer text-sm text-center w-full'
+    className='bg-green-700 text-white mt-[300px]  py-3 px-4 rounded-xl hover:bg-green-600 cursor-pointer text-sm text-center w-full'
   >
     My Resume
   </button>
