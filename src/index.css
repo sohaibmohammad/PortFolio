@@ -17,8 +17,20 @@
   margin-top: -100px;
   padding-bottom: 100px;
   display: block;
+  
+  
 }
-
+.hash-span::before {
+  content: ''; /* عنصر وهمي فارغ */
+  position: absolute; /* نطلقه بحرية داخل الـ span */
+  left: 0; /* نلزقه على اليسار */
+  top: 100px; /* ننزله عشان ييجي تحت منطقة الـ margin السالبة وبالضبط عند بداية المحتوى */
+  width: 4px; /* عرض الشحطة */
+  height: 40px; /* طول الشحطة */
+  background-color: #915eff; /* اللون البنفسجي (ممكن تغيره لـ black مثلاً) */
+  border-radius: 2px; /* حواف ناعمة */
+  /* إذا كان عندك animation، ممكن تضيف transition هنا */
+}
 .black-gradient {
   background: #000000; /* fallback for old browsers */
   background: -webkit-linear-gradient(
