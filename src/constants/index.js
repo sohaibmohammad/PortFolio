@@ -175,7 +175,7 @@ const projects = [
       },
     ],
     image: notNull,
-    deploy: "https://notnull-socialmedia.netlify.app/",
+    deploy: "https://github.com/sohaibmohammad/FrontEndChatRealTime",
     source_code_link: "https://github.com/sohaibmohammad/realTimeChat--Backend",
   },
   {
@@ -209,7 +209,7 @@ const projects = [
       },
     ],
     image: backItc,
-    deploy: "",
+    deploy: "https://github.com/sohaibmohammad/Ecommerce_Backend",
     source_code_link: "https://github.com/sohaibmohammad/Ecommerce_Backend",
   },
 ];
