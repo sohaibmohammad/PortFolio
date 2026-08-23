@@ -54,8 +54,8 @@ useEffect(() => {
             <li
               key={link.id}
               className={`${
-                active === link.title ? "text-[#915eff]" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
+                active === link.title ? "text-green-600" : "text-secondary"
+              } hover:text-green-600 text-[18px] font-medium cursor-pointer`}
               onClick={() => setActive(link.title)}
             >
               <a href={`#${link.id}`}>{link.title}</a>
